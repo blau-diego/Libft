@@ -6,7 +6,7 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:40:37 by dierojas          #+#    #+#             */
-/*   Updated: 2025/04/15 02:04:00 by dierojas         ###   ########.fr       */
+/*   Updated: 2026/09/16 02:02:44 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@
 #  define MAX_FD 1024
 # endif
 
+#define FALSE 0
+#define TRUE 1
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include <fcntl.h>
+# include <limits.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -32,6 +36,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isspace(int c);
+int		ft_isupper(int c);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
@@ -68,20 +73,35 @@ int		ft_putnbr(int n);
 int		ft_putstr(char *s);
 int		ft_put_unsnbr(unsigned int n);
 int		ft_put_hexdec(unsigned long long nb, int m);
-void	ft_matrix_free(char **str, int j);
-//
-//	ft_print_utils functions 
-//
+void	ft_mtxfree(char **mtx);
+int		ft_mtxlen(char **map);
+char	**ft_mtxdup(char **mtx);
+char	*ft_strcpyl(char *dst, const char *src, size_t len);
+
 int		ft_hexdec_aux(char const *s, va_list args);
 int		ft_pointer_aux(va_list args);
 int		ft_putchar_aux(va_list args);
 int		ft_putnbr_aux(char const *s, va_list args);
 int		ft_putstr_aux(va_list args);
-//
-//	2nd core functions
-//
+
 int		ft_printf(char const *s, ...);
 char	*get_next_line(int fd);
 char	*get_next_line_bonus(int fd);
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

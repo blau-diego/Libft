@@ -3,45 +3,69 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+         #
+#    By: danielg3 <danielg3@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 19:50:54 by dierojas          #+#    #+#              #
-#    Updated: 2025/04/15 02:07:02 by dierojas         ###   ########.fr        #
+#    Updated: 2026/07/13 16:16:07 by danielg3         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 SRCS = \
-		ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-		ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
-		ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-		ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
-		ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-		ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c \
-		ft_strjoin.c ft_strtrim.c ft_itoa.c ft_split.c \
-		ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_put_hexdec_fd.c \
-		ft_put_unsnbr_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-		ft_isspace.c ft_matrix_free.c ft_putchar.c ft_putstr.c \
-		ft_putnbr.c ft_put_unsnbr.c ft_put_hexdec.c ft_printf_utils.c \
-		ft_printf.c get_next_line.c get_next_line_bonus.c
+		booleans/ft_isalnum.c booleans/ft_isalpha.c booleans/ft_isascii.c booleans/ft_isdigit.c \
+		booleans/ft_isprint.c booleans/ft_isspace.c booleans/ft_isupper.c\
+		conversions/ft_atoi.c conversions/ft_itoa.c conversions/ft_tolower.c conversions/ft_toupper.c \
+		memory/ft_bzero.c memory/ft_calloc.c memory/ft_memchr.c memory/ft_memcmp.c \
+		memory/ft_memcpy.c memory/ft_memmove.c memory/ft_memset.c \
+		mtx/ft_mtxdup.c mtx/ft_mtxfree.c mtx/ft_mtxlen.c mtx/ft_split.c \
+		prints/ft_put_hexdec_fd.c prints/ft_put_unsnbr_fd.c prints/ft_putchar_fd.c \
+		prints/ft_putendl_fd.c prints/ft_putnbr_fd.c prints/ft_putstr_fd.c \
+		strings/ft_strchr.c strings/ft_strdup.c strings/ft_striteri.c strings/ft_strjoin.c \
+		strings/ft_strlcat.c strings/ft_strlcpy.c strings/ft_strlen.c strings/ft_strmapi.c \
+		strings/ft_strncmp.c strings/ft_strnstr.c strings/ft_strrchr.c strings/ft_strtrim.c \
+		strings/ft_substr.c strings/ft_strcpyl.c
+
+BSRCS = \
+		lst/ft_lstnew.c lst/ft_lstadd_back.c lst/ft_lstadd_front.c lst/ft_lstclear.c \
+		lst/ft_lstdelone.c lst/ft_lstiter.c lst/ft_lstlast.c lst/ft_lstmap.c \
+		lst/ft_lstsize.c
+PRINTSRCS = \
+			prints/ft_putchar.c prints/ft_putstr.c prints/ft_putnbr.c \
+			prints/ft_put_unsnbr.c prints/ft_put_hexdec.c prints/ft_printf_utils.c \
+			prints/ft_printf.c
+GNLSRCS = get_next_line/get_next_line.c get_next_line/get_next_line_bonus.c
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
+PRINTFOBJS = $(PRINTSRCS:.c=.o)
+GNLOBJS = $(GNLSRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
+AR = ar
+ARFLAGS = rcs
 
 all: $(NAME)
 
-$(NAME): $(OBJS) 
-	$(AR) -r $@ $?
+$(NAME): $(OBJS) $(BOBJS) $(PRINTFOBJS) $(GNLOBJS)
+	$(AR) $(ARFLAGS) $@ $^
+
+bonus: $(BOBJS)
+	$(AR) $(ARFLAGS) $(NAME) $^
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $?
+	$(CC) $(CFLAGS) -c $< -o $@
+
+print: $(PRINTFOBJS)
+	$(AR) $(ARFLAGS) $(NAME) $^
+
+gnl: $(GNLOBJS)
+	$(AR) $(ARFLAGS) $(NAME) $^
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BOBJS) $(PRINTFOBJS) $(GNLOBJS)
 
 fclean:	clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus print gnl
