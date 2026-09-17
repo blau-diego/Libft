@@ -6,37 +6,47 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 01:27:26 by dierojas          #+#    #+#             */
-/*   Updated: 2026/09/16 03:03:05 by dierojas         ###   ########.fr       */
+/*   Updated: 2026/09/17 03:14:36 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	**ft_mtxtrim(char const **mtx, char const **set)
+static void	ft_mtxtrim_limits(char **mtx, char **set,
+				size_t *start, size_t *end);
+
+char	**ft_mtxtrim(char **mtx, char **set)
 {
 	char	**mtx2;
-	size_t	len;
 	size_t	start;
 	size_t	end;
+	size_t	i;
 
-	if (!set || !mtx)
+	if (!mtx || !set)
 		return (NULL);
-	while (mtx[start] && ft_mtxstr(set, mtx[start]))
-		start++;
-	end = ft_mtxlen(mtx);
-	while (end > start && ft_mtxstr(set, mtx[end - 1]))
-		end--;
-	len = end - start;
-	mtx2 = malloc((len + 1) * (sizeof (char *)));
+	ft_mtxtrim_limits(mtx, set, &start, &end);
+	mtx2 = malloc((end - start + 1) * sizeof(*mtx2));
 	if (!mtx2)
 		return (NULL);
-	end = -1;
-	while (++end < len)
+	i = 0;
+	while (start + i < end)
 	{
-		mtx2[end] = ft_strdup(mtx[start + end]);
-		if (!mtx2[end])
+		mtx2[i] = ft_strdup(mtx[start + i]);
+		if (!mtx2[i])
 			return (ft_mtxfree(mtx2), NULL);
+		i++;
 	}
-	mtx2[len] = NULL;
+	mtx2[i] = NULL;
 	return (mtx2);
+}
+
+static void	ft_mtxtrim_limits(char **mtx, char **set,
+							size_t *start, size_t *end)
+{
+	*start = 0;
+	while (mtx[*start] && ft_mtxstr(set, mtx[*start]))
+		(*start)++;
+	*end = ft_mtxlen(mtx);
+	while (*end > *start && ft_mtxstr(set, mtx[*end - 1]))
+		(*end)--;
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mtxlen.c                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 02:14:21 by dierojas          #+#    #+#             */
-/*   Updated: 2026/09/17 03:02:32 by dierojas         ###   ########.fr       */
+/*   Created: 2026/09/16 09:59:36 by dierojas          #+#    #+#             */
+/*   Updated: 2026/09/16 10:24:47 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-size_t	ft_mtxlen(char **mtx)
+void	ft_swap(char *a, char *b)
 {
-	int	len;
+	char	*c;
 
-	len = 0;
-	while (mtx[len])
-		len++;
-	return (len);
+	c = *a;
+	*a = *b;
+	*b = c;
 }

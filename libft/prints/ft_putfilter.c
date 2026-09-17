@@ -6,13 +6,13 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 04:09:13 by dierojas          #+#    #+#             */
-/*   Updated: 2026/09/15 04:11:56 by dierojas         ###   ########.fr       */
+/*   Updated: 2026/09/17 02:46:29 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void    ft_filter(char *text, char *filter, char filter_char)
+void	ft_putfilter(char *text, char *filter, char filter_char)
 {
 	int i;
 	int j;

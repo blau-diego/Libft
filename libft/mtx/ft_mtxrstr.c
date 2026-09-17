@@ -6,13 +6,13 @@
 /*   By: dierojas < dierojas@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/16 03:28:44 by dierojas          #+#    #+#             */
-/*   Updated: 2026/09/16 03:30:09 by dierojas         ###   ########.fr       */
+/*   Updated: 2026/09/17 03:00:35 by dierojas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	*ft_mtxrstr(const char **mtx, char *str)
+char	*ft_mtxrstr(char **mtx, char *str)
 {
 	unsigned int	i;
 
